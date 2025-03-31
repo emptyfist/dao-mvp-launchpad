@@ -16,9 +16,7 @@ This repository contains a MVP FrontEnd to serve Otaris Launchpad.
 
 ## Published URL
 
-- Dev : https://otaris-dev-app.faculty.tools/
-- UAT : https://otaris-uat-app.faculty.tools/
-- PROD: https://app.otaris.io/
+https://otaris-dev-app.faculty.tools/
 
 ## Glossary
 
