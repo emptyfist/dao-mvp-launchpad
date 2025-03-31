@@ -1,0 +1,75 @@
+image: node:18
+
+definitions:
+    steps:
+        - step: &deploy_to_s3
+              name: Build react app
+              deployment: Dev
+              caches:
+                  - node
+              script:
+                  - yarn
+                  - yarn build
+                  - pipe: 'atlassian/aws-s3-deploy:1.1.0'
+                    variables:
+                        AWS_ACCESS_KEY_ID: $AWS_KEY
+                        AWS_SECRET_ACCESS_KEY: $AWS_SECRET
+                        AWS_DEFAULT_REGION: $AWS_REGION
+                        S3_BUCKET: $S3_BUCKET
+                        LOCAL_PATH: build
+                        DELETE_FLAG: 'true'
+                        CACHE_CONTROL: 'max-age=604800'
+                  - pipe: atlassian/aws-cloudfront-invalidate:0.6.0
+                    variables:
+                        AWS_ACCESS_KEY_ID: $AWS_KEY
+                        AWS_SECRET_ACCESS_KEY: $AWS_SECRET
+                        AWS_DEFAULT_REGION: $AWS_REGION
+                        DISTRIBUTION_ID: $CLOUDFRONT_DISTRIBUTION_ID
+              artifacts:
+                  - build/**
+
+        - step: &build_test
+              name: Build React
+              caches:
+                  - node
+              script:
+                  # Unset CI should not be necessary
+                  # - unset CI
+                  - yarn
+                  - yarn build
+
+pipelines:
+    custom:
+        create_Version_Branch:
+            - step: *build_test
+            - step:
+                  image: atlassian/default-image:3
+                  name: Create version branch and increment version
+                  script:
+                      - SPRINT_VERSION_NEW=$SPRINT_VERSION
+                      - let "SPRINT_VERSION_NEW=SPRINT_VERSION_NEW+1"
+                      - git fetch
+                      - git pull
+                      - git checkout -b version/v.s_$SPRINT_VERSION_NEW
+                      - git push origin version/v.s_$SPRINT_VERSION_NEW
+                      - curl -X PUT -u $BITBUCKET_USER:$APP_PASSWORD
+                        --url "https://api.bitbucket.org/2.0/repositories/$BITBUCKET_REPO_FULL_NAME/pipelines_config/variables/%7Ba61b313c-cbb6-4f6e-804c-4d018574385d%7D"
+                        -H 'Content-Type:application/json' -d "{\"value\":\"$SPRINT_VERSION_NEW\",\"key\":\"SPRINT_VERSION\"}"
+
+    branches:
+        dev:
+            - step:
+                  <<: *deploy_to_s3
+                  deployment: Dev
+        pmvp-dev:
+            - step:
+                  <<: *deploy_to_s3
+                  deployment: PMVPDev
+        uat:
+            - step:
+                  <<: *deploy_to_s3
+                  deployment: Uat
+        master:
+            - step:
+                  <<: *deploy_to_s3
+                  deployment: Production

@@ -1,0 +1,1007 @@
+#kyc.page,
+#membership.page {
+    .page-title {
+        @include breakpoint(laptop) {
+            display: none;
+        }
+    }
+
+    .page-content {
+        .sp-page-caption {
+            display: none;
+
+            @include breakpoint(laptop) {
+                display: flex;
+            }
+
+            .icon-wrapper {
+                color: $primaryColor;
+
+                svg {
+                    path {
+                        fill: $primaryColor;
+                    }
+                }
+            }
+        }
+
+        padding-top: 10px;
+
+        .page-subheader {
+            @include flexWrapper;
+            @include alignItemsCenter;
+
+            @include breakpoint(tablet) {
+                @include flexColumn;
+            }
+
+            .membership-header {
+                @include flexWrapper;
+                @include alignItemsCenter;
+                @include flexRow;
+
+                padding: 1rem 0;
+
+                @include breakpoint(tablet) {
+                    width: 100%;
+                }
+
+                .mint-status-header {
+                    border-radius: 0 20px 20px 0;
+                    width: 300px;
+
+                    @include breakpoint(tablet) {
+                        width: calc(100% - 50px);
+                    }
+
+                    .caption-wrapper {
+                        background-color: #11a3b7;
+                        border-radius: 30px 0 0 30px;
+                        padding: 0 1.5rem 0 2rem;
+                        white-space: nowrap;
+                        font-size: 14px;
+                        position: relative;
+
+                        &:after {
+                            content: '';
+                            position: absolute;
+                            background-color: #11a3b7;
+                            height: 100%;
+                            width: 40px;
+                            top: 0;
+                            right: -40px;
+                        }
+                    }
+
+                    .status-wrapper {
+                        @include flexWrapper;
+                        @include alignItemsCenter;
+                        height: 100%;
+                        width: 100%;
+                        border-radius: 30px;
+                        border: 1px solid #3bdcb1;
+                        flex: 1;
+
+                        .status-info {
+                            height: calc(100% + 2px);
+                            position: relative;
+
+                            @include breakpoint(tablet) {
+                                width: 100%;
+                            }
+
+                            .mint-button {
+                                padding: 0 2.5rem;
+                                border: 1px solid #3bdcb1 !important;
+                                background: $cyanReverseGradientColor !important;
+                                box-shadow: none !important;
+                                font-weight: 700;
+
+                                @include breakpoint(mobile) {
+                                    padding: 0 0.5rem;
+                                }
+                            }
+                        }
+
+                        .status-note {
+                            font-family: 'Rubik';
+                            flex: 1;
+                            text-align: center;
+
+                            span {
+                                font-size: 14px;
+                                font-weight: 700;
+                                line-height: 17px;
+                                color: white;
+                            }
+
+                            @include breakpoint(tablet) {
+                                min-width: 150px;
+                            }
+
+                            @include breakpoint(mobile) {
+                                min-width: unset;
+                                white-space: nowrap;
+                                padding: 0 10px;
+
+                                span {
+                                    font-size: 10px;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .header-icon {
+                    width: 40px;
+                    height: 40px;
+                    margin-left: 0.5rem;
+
+                    @include breakpoint(tablet) {
+                        margin-left: 0;
+                        margin-right: 0.5rem;
+                        display: flex;
+                        align-items: center;
+                    }
+                }
+
+                @include breakpoint(tablet) {
+                    flex-direction: row-reverse;
+                }
+            }
+        }
+
+        .htab-container {
+            font-family: 'Rubik';
+            min-width: 250px;
+            height: 375px;
+
+            @include breakpoint(tablet) {
+                min-width: 100%;
+                width: 100%;
+                height: 100%;
+                z-index: 10;
+            }
+
+            .htab-wrapper {
+                @include flexWrapper;
+                @include flexColumn;
+                @include alignItemsCenter;
+
+                @include breakpoint(tablet) {
+                    @include flexRowReverse;
+                }
+
+                background: rgba(26, 34, 56, 0.8);
+                box-shadow: -10px -10px 15px rgba(50, 64, 102, 0.3),
+                10px 10px 15px rgba(1, 7, 19, 0.3);
+                border-radius: 20px;
+                position: relative;
+
+                .item-container {
+                    display: flex;
+                    width: 100%;
+                    padding: 1rem 0;
+                    cursor: pointer;
+                    z-index: 2;
+
+                    @include breakpoint(tablet) {
+                        @include alignItemsCenter;
+                        flex-direction: column-reverse;
+                    }
+
+                    p {
+                        align-self: center;
+                        flex: auto;
+                        text-align: right;
+                        font-weight: normal;
+                        font-size: 18px;
+                        color: white;
+                        @include transition;
+
+                        @include breakpoint(tablet) {
+                            font-size: 2.5vw;
+                        }
+
+                        @include breakpoint(phablet) {
+                            margin-top: 0.5rem;
+                        }
+
+                        @include breakpoint(mobile) {
+                            font-size: 8px;
+                        }
+                    }
+
+                    img {
+                        width: 60px;
+                        height: 60px;
+                        margin: 0 1rem;
+
+                        @include breakpoint(tablet) {
+                            width: 10vw;
+                            height: 10vw;
+                            margin: 0 1rem;
+                        }
+
+                        @include breakpoint(mobile) {
+                            width: 14vw;
+                            height: 14vw;
+                        }
+                    }
+                }
+
+                .animated-bg {
+                    background: linear-gradient(110.05deg, #3bdcb1 13.06%, #11a3b7 84.95%);
+                    border-radius: 20px;
+                    position: absolute;
+                    width: 100%;
+                    height: 25%;
+                    top: 0;
+                    left: 0;
+                    z-index: 1;
+                    @include transition;
+
+                    @include breakpoint(tablet) {
+                        width: 25%;
+                        height: 100%;
+                    }
+                }
+            }
+        }
+
+        .mint-overview {
+            @include flexWrapper;
+            @include alignItemsCenter;
+
+            padding: 1rem 0;
+
+            @include breakpoint(tablet) {
+                @include flexColumn;
+                padding: 0.5rem 0;
+            }
+
+            .mint-icon {
+                height: 375px;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                align-items: center;
+                padding: 0 2rem;
+
+                img {
+                    width: 200px;
+                    object-fit: contain;
+                }
+
+                span {
+                    font-size: 18px;
+                    font-weight: bold;
+                }
+
+
+                @include breakpoint(tablet) {
+                    display: none;
+                }
+            }
+
+            .mint-info {
+                font-family: 'Rubik';
+                flex: auto;
+                height: 375px;
+                background: rgba(26, 34, 56, 0.8);
+                box-shadow: -10px -10px 15px rgba(50, 64, 102, 0.3), 10px 10px 15px rgba(1, 7, 19, 0.3);
+                border-radius: 20px;
+                position: relative;
+
+                @include breakpoint(tablet) {
+                    z-index: 9;
+                    top: -15px;
+                    border-radius: 0 0 20px 20px;
+                    overflow: hidden;
+                    width: 100%;
+                    height: 340px;
+                }
+
+                .mint-info-wrapper {
+                    padding: 1rem;
+                    position: relative;
+
+                    @include breakpoint(tablet) {
+                        @include flexWrapper;
+                        @include flexRow;
+                    }
+
+                    .mint-info-container {
+                        width: 100%;
+
+                        @include breakpoint(tablet) {
+                            width: 45%;
+                        }
+
+                        @include breakpoint(phablet) {
+                            width: 100%;
+                        }
+
+                        .mint-info-detail {
+                            @include flexWrapper;
+                            @include flexColumn;
+
+                            padding: 1rem 0;
+
+                            border-bottom: 1px dashed;
+
+                            span {
+                                font-size: 18px;
+                                font-weight: bold;
+                                line-height: 21px;
+
+                                @include breakpoint(mobile) {
+                                    font-size: 15px;
+                                }
+                            }
+
+                            .title {
+                                color: white;
+                            }
+
+                            .amount {
+                                color: #3bdcb1;
+                            }
+
+                            &:last-child {
+                                border-bottom: none;
+                            }
+                        }
+                    }
+                }
+
+                img {
+                    position: absolute;
+                    display: none;
+
+                    @include breakpoint(tablet) {
+                        display: block;
+                        width: 40vw;
+                        top: 0;
+                        right: 0;
+                        opacity: 0.9;
+                    }
+
+                    @include breakpoint(phablet) {
+                        display: none;
+                    }
+                }
+
+                &:before {
+                    position: absolute;
+                    content: '';
+                    background: #3bdcb1;
+                    border-radius: 44px;
+                    top: 40px;
+                    left: -7px;
+                    height: 300px;
+                    width: 7px;
+                    opacity: 0.9;
+
+                    display: block;
+
+                    @include breakpoint(tablet) {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+
+    .content-header {
+        padding-top: 10px;
+    }
+
+    .next-steps {
+        position: relative;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-column-gap: 1rem;
+
+        @include breakpoint(phablet) {
+            grid-template-columns: minmax(0, 1fr);
+        }
+
+        // div:first-child {
+        //     margin-right: 1rem;
+
+        //     @include breakpoint(phablet) {
+        //         margin-right: 0;
+        //     }
+        // }
+
+        // div:last-child {
+        //     margin-left: 1rem;
+
+        //     @include breakpoint(phablet) {
+        //         margin-left: 0;
+        //         margin-right: 0;
+        //     }
+        // }
+
+        .left-panel {
+            width: 100%;
+
+            h2 {
+                font-size: 24px;
+                font-weight: 500;
+                margin: 1rem 0;
+            }
+
+            h3 {
+                font-size: 18px;
+                font-weight: 500;
+                margin: 1rem 0;
+            }
+
+            p {
+                font-size: 14px;
+                font-weight: 300;
+                margin: 1rem 0;
+            }
+
+            li {
+                font-size: 14px;
+                font-weight: 300;
+                margin: 4px 0;
+            }
+
+            .markdown-body {
+                height: 550px;
+                overflow: auto;
+
+                &::-webkit-scrollbar {
+                    width: 6px;
+                }
+
+                &::-webkit-scrollbar-track {
+                    background: transparent;
+                }
+
+                &::-webkit-scrollbar-thumb {
+                    background: $grayText;
+                    border-radius: 3px;
+                }
+            }
+        }
+
+        .right-panel {
+            background: $bgNavbar;
+            border-radius: 15px;
+            box-shadow: -10px 0px 30px rgba(0, 0, 0, 0.15);
+            padding: 40px;
+
+            @include breakpoint(phablet) {
+                margin-left: -2rem;
+                margin-right: -2rem;
+                padding: 2rem 2rem 0 2rem;
+            }
+
+            @include breakpoint(mobile) {
+                margin-left: -1rem;
+                margin-right: -1rem;
+                padding: 1rem 1rem 0 1rem;
+            }
+
+            .divider {
+                display: none;
+
+                @include breakpoint(phablet) {
+                    display: block;
+                }
+            }
+
+            .label {
+                font-size: 14px;
+                font-weight: bold;
+                display: block;
+            }
+
+            .value {
+                font-size: 16px;
+                font-weight: 500;
+                color: rgba($textColor, 0.3);
+                margin-bottom: 1rem;
+                display: block;
+
+                &.wallet-address {
+                    font-size: 18px;
+                }
+            }
+
+            .kyc-status {
+                display: flex;
+                align-items: center;
+                margin-bottom: 1rem;
+
+                svg {
+                    width: 20px;
+                    height: 20px;
+
+                    path {
+                        fill: $primaryColor;
+                    }
+                }
+
+                span {
+                    color: $primaryColor;
+                    line-height: 24px;
+                    margin-left: 0.5rem;
+                }
+            }
+
+            .social-form {
+                .input-wrapper {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+
+                    .input-item:first-child {
+                        margin-right: 1rem;
+
+                        @include breakpoint(phablet) {
+                            margin-right: 0;
+                        }
+                    }
+
+                    .input-item:last-child {
+                        margin-left: 1rem;
+
+                        @include breakpoint(phablet) {
+                            margin-left: 0;
+                        }
+                    }
+
+                    @include breakpoint(phablet) {
+                        grid-template-columns: 1fr;
+                        row-gap: 0.5rem;
+                    }
+                }
+
+                .social-item-container {
+                    display: grid;
+                    flex-direction: column;
+                    row-gap: 1rem;
+                    margin: 2rem 0;
+
+                    @include breakpoint(phablet) {
+                        row-gap: 1.5rem;
+                    }
+
+                    .social-item {
+                        display: grid;
+                        grid-template-columns: 1fr 4fr 2.5fr 2.5fr;
+                        align-items: center;
+                        grid-column-gap: 0.5rem;
+
+                        .prompt {
+                            display: flex;
+                            flex-direction: column;
+
+                            @include breakpoint(phablet) {
+                                flex-direction: row;
+                            }
+
+                            span {
+                                font-size: 12px;
+
+                                &:first-of-type {
+                                    font-size: 14px;
+                                    font-weight: bold;
+
+                                    @include breakpoint(phablet) {
+                                        font-size: 12px;
+                                        font-weight: normal;
+                                    }
+                                }
+                            }
+                        }
+
+                        .simple-btn-wrapper {
+                            font-size: 12px;
+                            height: 27px;
+
+                            @include breakpoint(phablet) {
+                                height: 36px;
+                            }
+                        }
+
+                        svg {
+                            width: 28px;
+                            height: auto;
+
+                            path {
+                                fill: $primaryColor;
+                            }
+                        }
+
+                        @include breakpoint(phablet) {
+                            display: grid;
+                            border: 1px solid #ffffff;
+                            border-radius: 20px;
+                            padding: 1.5rem 2rem;
+                            grid-template-columns: 1fr;
+                            row-gap: 1rem;
+                            justify-items: center;
+                        }
+                    }
+                }
+
+                .step-container {
+                    display: flex;
+                    align-items: center;
+
+                    >span {
+                        margin-left: 1rem;
+                        font-size: 18px;
+                        font-weight: bold;
+                    }
+
+                    @include breakpoint(phablet) {
+                        display: none;
+                    }
+                }
+            }
+
+            .quiz {
+                .quiz-status-wrapper {
+                    display: none;
+
+                    @include breakpoint(phablet) {
+                        display: block;
+                    }
+                }
+
+                .quiz-container {
+                    max-height: 400px;
+                    overflow: auto;
+                    position: relative;
+
+                    @include breakpoint(phablet) {
+                        max-height: unset;
+                        padding-bottom: 1rem;
+                    }
+
+                    &::-webkit-scrollbar {
+                        width: 6px;
+                    }
+
+                    &::-webkit-scrollbar-track {
+                        background: transparent;
+                    }
+
+                    &::-webkit-scrollbar-thumb {
+                        background: $bgPrimary;
+                        border-radius: 3px;
+                    }
+
+                    .quiz-item {
+                        .title {
+                            font-size: 14px;
+                            font-weight: bold;
+                            margin: 1rem 0;
+
+                            @include breakpoint(phablet) {
+                                margin-top: 0;
+                            }
+                        }
+
+                        .custom-check-wrapper {
+                            margin: 1rem 0;
+                            align-items: center;
+
+                            .check-wrapper {
+                                width: 16px;
+                                height: 16px;
+                            }
+
+                            span {
+                                font-size: 14px;
+                            }
+                        }
+                    }
+                }
+
+                .step-container {
+                    display: flex;
+                    align-items: center;
+                    padding-top: 1rem;
+
+                    >span {
+                        margin-left: 1rem;
+                        font-size: 18px;
+                        font-weight: bold;
+                    }
+
+                    @include breakpoint(phablet) {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+
+    .sp-step-container {
+        display: none;
+
+        @include breakpoint(phablet) {
+            display: block;
+            position: absolute;
+            width: calc(100% - 4rem);
+            bottom: -3rem;
+            left: 2rem;
+            z-index: 5;
+
+            .btn-content {
+                width: 100%;
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+
+                .step {
+                    text-align: right;
+                    margin-right: 1rem;
+                }
+            }
+        }
+
+        @include breakpoint(mobile) {
+            width: 100%;
+            left: 0;
+        }
+    }
+
+    .next-step-kyc-wrapper {
+        .card-content {
+            padding-bottom: 0;
+        }
+    }
+
+    .kyc-personal-info {
+        @include breakpoint(phablet) {
+            @include flexWrapper;
+            @include flexColumn;
+            @include alignItemsCenter;
+
+            .remark-caption {
+                text-align: center;
+                white-space: pre-wrap;
+            }
+        }
+    }
+
+    .personal-addr {
+        margin-bottom: 0.5rem;
+
+        .wallet-attr {
+            padding-left: 1rem;
+            font-weight: 700;
+
+            @include breakpoint(phablet) {
+                padding-left: 0;
+            }
+        }
+
+        @include breakpoint(phablet) {
+            display: grid;
+            flex-direction: column;
+            align-items: center;
+            row-gap: 0.5rem;
+            justify-items: center;
+        }
+    }
+
+    .remark-caption {
+        color: #687c92;
+    }
+
+    .two-child-wrapper {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+
+        @include breakpoint(phablet) {
+            grid-template-columns: 1fr;
+            width: 100%;
+        }
+
+        .input-with-label:first-child {
+            margin-right: 1.25rem;
+
+            @include breakpoint(phablet) {
+                margin-right: 0;
+            }
+        }
+
+        .input-with-label:last-child {
+            margin-left: 1.25rem;
+
+            @include breakpoint(phablet) {
+                margin-left: 0;
+            }
+        }
+    }
+
+    .input-with-label {
+        @include flexWrapper;
+        @include flexColumn;
+        margin-top: 2rem;
+
+        span {
+            margin-bottom: 0.5rem;
+
+            &.input-label-error {
+                color: $redColor;
+                margin-top: 0.5rem;
+                margin-bottom: 0;
+                text-align: center;
+                font-size: 14px;
+            }
+        }
+
+        .input-label-title {
+            font-weight: 600;
+        }
+
+        @include breakpoint(phablet) {
+            width: 100%;
+            margin-top: 1rem;
+        }
+    }
+
+    .kyc-upload-documents {
+        @include flexWrapper;
+        @include flexColumn;
+
+        .input-with-label {
+            margin-top: 0;
+
+            @include breakpoint(phablet) {
+                margin-top: 1rem;
+            }
+        }
+
+        .photo-wrapper {
+            display: grid;
+            flex-direction: column;
+            row-gap: 1rem;
+
+            .selfie-preview {
+                padding: 1rem 1rem;
+                width: 60%;
+                margin: 0 auto;
+                @include flexWrapper;
+                @include justifyContentCenter;
+            }
+        }
+
+        .agree-wrapper {
+            margin: 3rem 0;
+
+            @include breakpoint(phablet) {
+                margin-bottom: 0;
+            }
+        }
+
+        .document-select-wrapper {
+            margin-top: 2rem;
+            // @include flexWrapper;
+            display: grid;
+            @include flexColumn;
+            row-gap: 1rem;
+
+            .upload-preview {
+                @include flexWrapper;
+                @include justifyContentCenter;
+                @include alignItemsCenter;
+                margin-top: 1rem;
+
+                .document-preview-sp-img,
+                .passport-preview-sp-img {
+                    display: none;
+                }
+
+                @include breakpoint(phablet) {
+
+                    .document-preview-img,
+                    .passport-preview-img {
+                        display: none;
+                    }
+
+                    .document-preview-sp-img,
+                    .passport-preview-sp-img {
+                        display: block;
+                    }
+
+                    @include flexWrapper;
+                    flex-direction: column-reverse;
+                }
+            }
+
+            .document-preview-wrapper {
+                display: grid;
+                @include alignItemsCenter;
+                grid-template-columns: 1fr 1fr;
+                padding: 1rem 1rem;
+
+                div:first-child {
+                    margin-right: 0.5rem;
+
+                    @include breakpoint(phablet) {
+                        margin-right: 0;
+                    }
+                }
+
+                div:last-child {
+                    margin-left: 0.5rem;
+
+                    @include breakpoint(phablet) {
+                        margin-left: 0;
+                    }
+                }
+
+                img {
+                    width: 100%;
+                    height: auto;
+                }
+            }
+
+            .passport-preview-wrapper {
+                padding: 1rem 1rem;
+                width: 60%;
+                margin: 0 auto;
+                @include flexWrapper;
+                @include justifyContentCenter;
+            }
+
+            span.tips {
+                margin-left: 3rem;
+                width: 30%;
+                white-space: pre-wrap;
+
+                &.passport {
+                    width: 50%;
+                }
+
+                @include breakpoint(phablet) {
+                    margin-left: 0;
+                    width: 100%;
+
+                    &.passport {
+                        width: 100%;
+                    }
+
+                    margin-bottom: 2rem;
+                }
+            }
+        }
+
+        .next-step-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            @include alignItemsCenter;
+
+            span {
+                text-align: right;
+            }
+
+            @include breakpoint(phablet) {
+                display: none;
+            }
+        }
+    }
+
+    .divider {
+        margin: 2rem 0;
+        border-bottom: 2px dotted $grayText;
+        width: 100%;
+    }
+}
+
+#kyc.page {
+    .page-content {
+        padding-top: 2rem;
+    }
+}

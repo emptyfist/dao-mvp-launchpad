@@ -1,0 +1,345 @@
+#sale,
+#sales,
+#membership,
+#staking,
+#farming,
+#kyc {
+    width: calc(100% - 196px);
+
+    @include breakpoint(laptop) {
+        width: 100%;
+        padding-top: 2rem;
+    }
+
+    @include breakpoint(mobile) {
+        width: calc(100vw - 2rem);
+    }
+
+    .page-title {
+        height: 66px;
+        width: 100%;
+        background: rgba($bgNavbar, 0.4);
+        border-radius: 0 20px 20px 0;
+        position: relative;
+        font-family: 'Rubik';
+
+        &:before {
+            content: '';
+            position: absolute;
+            width: 36px;
+            height: 36px;
+            background-color: #1c263f;
+            bottom: -36px;
+            left: 0px;
+            z-index: 0;
+        }
+
+        &:after {
+            content: '';
+            position: absolute;
+            width: 72px;
+            height: 72px;
+            background-color: $bgPrimary;
+            border-radius: 50%;
+            bottom: -72px;
+            left: 0px;
+            z-index: 0;
+        }
+
+        &.whitelist-header {
+            display: flex;
+            align-items: center;
+            padding: 0 30px;
+            padding-top: 10px;
+
+            @include breakpoint(laptop) {
+                background: none;
+                height: 0;
+                padding: 0 0.5rem;
+
+                &:after,
+                &:before {
+                    display: none;
+                }
+            }
+
+            svg {
+                margin-right: 0.5rem;
+            }
+
+            span {
+                margin-right: 0.5rem;
+                font-weight: bold;
+                font-size: 24px;
+            }
+
+            .back-wrapper {
+                cursor: pointer;
+            }
+        }
+
+        @include breakpoint(laptop) {
+            height: unset;
+        }
+
+        .space-gap {
+            flex: auto;
+            height: 16px;
+
+            @include breakpoint(laptop) {
+                border-bottom: 1px dashed rgba(255, 255, 255, 0.5);
+            }
+        }
+
+        .page-caption {
+            display: none;
+
+            @include breakpoint(laptop) {
+                display: flex;
+                color: $primaryColor;
+
+                svg {
+                    path {
+                        fill: $primaryColor;
+                    }
+                }
+            }
+        }
+
+        .back-wrapper {
+            display: none;
+        }
+    }
+
+    .page-content {
+        padding: 30px;
+
+        @include breakpoint(laptop) {
+            padding: 2rem 0;
+        }
+    }
+
+    .kyc-status-header {
+        padding: 15px 30px;
+        height: 66px;
+        // background: rgba($bgNavbar, 0.4);
+        border-radius: 0 20px 20px 0;
+        @include flexWrapper;
+        @include alignItemsCenter;
+
+        @include breakpoint(laptop) {
+            display: none;
+        }
+
+        .caption-wrapper {
+            @include flexWrapper;
+            @include alignItemsCenter;
+            background-color: #11a3b7;
+            border-radius: 30px 0 0 30px;
+            padding: 0 1.5rem 0 2rem;
+            height: 100%;
+            white-space: nowrap;
+            font-size: 14px;
+
+            position: relative;
+
+            &:after {
+                content: '';
+                position: absolute;
+                background-color: #11a3b7;
+                height: 100%;
+                width: 20px;
+                top: 0;
+                right: -20px;
+            }
+        }
+
+        .status-wrapper {
+            @include flexWrapper;
+            @include alignItemsCenter;
+            height: 100%;
+            border-radius: 30px;
+            border-width: 1px;
+            border-style: solid;
+            flex: 1;
+
+            &.green-note {
+                border-color: $primaryColor;
+            }
+
+            &.red-note {
+                border-color: $redColor;
+            }
+
+            .status-info {
+                @include flexWrapper;
+                @include alignItemsCenter;
+                height: calc(100% + 2px);
+
+                position: relative;
+                background: $cyanReverseGradientColor;
+                border-radius: 30px;
+                padding: 0 1rem;
+
+                span {
+                    margin-left: 0.7rem;
+                    font-size: 14px;
+                }
+
+                &.red-note {
+                    background: $redGradientColor  !important;
+                }
+
+                &.gray-note {
+                    background: unset;
+                    background-color: $bgGray  !important;
+                }
+            }
+
+            .status-note {
+                flex: 1;
+                text-align: center;
+                font-size: 12px;
+
+                span:first-child {
+                    &.green-note {
+                        color: #3bdcb1;
+                    }
+
+                    &.red-note {
+                        color: $redColor;
+                    }
+                }
+
+                span:last-child {
+                    margin-left: 0.5rem;
+                }
+            }
+        }
+
+        .back-wrapper {
+            @include flexWrapper;
+            @include alignItemsCenter;
+            @include justifyContentCenter;
+            cursor: pointer;
+            margin-left: 1rem;
+
+            span {
+                margin-left: 0.5rem;
+            }
+        }
+    }
+}
+
+#sales,
+#farming,
+#staking {
+    .page-title {
+        display: flex;
+        align-items: center;
+        padding: 0 30px;
+        padding-top: 10px;
+
+        @include breakpoint(laptop) {
+            background: none;
+            padding: 0 0.5rem;
+
+            &:after,
+            &:before {
+                display: none;
+            }
+
+            position: absolute;
+            width: 100%;
+            z-index: 9999;
+            height: unset;
+            top: -500px;
+        }
+
+        @include breakpoint(tablet) {
+            width: calc(100% - 3rem);
+        }
+    }
+
+    .filter-wrapper {
+        width: 100%;
+        display: grid;
+
+        grid-template-columns: 3fr 5fr 3fr;
+        column-gap: 1rem;
+        @include alignItemsCenter;
+        @include transition;
+
+        .second-wrapper {
+            display: grid;
+            grid-template-columns: 3fr 2fr;
+            column-gap: 1rem;
+            @include alignItemsCenter;
+        }
+
+        @include breakpoint(laptop) {
+            column-gap: 0.5rem;
+            padding: 10px;
+            border-radius: 10px;
+            background-color: $bgNavbar;
+            box-shadow: 0px 0px 0px 1.6px #1a2238, -4px -4px 8px rgba(255, 255, 255, 0.1),
+                4px 8px 8px rgba(1, 7, 19, 0.2);
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 0;
+            z-index: 100;
+        }
+
+        @include breakpoint(tablet) {
+            grid-template-columns: 1fr;
+            row-gap: 0.5rem;
+
+            .second-wrapper {
+                column-gap: 0.5rem;
+            }
+        }
+    }
+
+    .filter-btn-wrapper {
+        display: none;
+
+        @include breakpoint(laptop) {
+            display: block;
+        }
+    }
+
+    .content-filter-wrapper {
+        display: none;
+
+        @include breakpoint(laptop) {
+            display: block;
+        }
+    }
+}
+
+#farming,
+#staking {
+    .filter-wrapper {
+        @include breakpoint(laptop) {
+            opacity: 0;
+            max-height: 0;
+        }
+
+        &.open {
+            opacity: 1;
+            max-height: 500px;
+        }
+    }
+
+    .content-filter-wrapper {
+        @include breakpoint(laptop) {
+            position: relative;
+        }
+    }
+}
+
+span[aria-live=polite] {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}

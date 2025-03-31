@@ -1,0 +1,220 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&display=swap');
+
+$primaryColor: #3bdcb1;
+$textColor: #fff;
+$grayText: #687c92;
+$timeColor: #73eeff;
+$cookieColor: #7000eb;
+$redColor: #FD7575;
+$primaryGradientColor: linear-gradient(180deg, #22b9b5 0%, #37d6b2 100%);
+$secondaryGradientColor: linear-gradient(180deg, #35405b 0%, #222c45 100%);
+$cyanGradientColor: linear-gradient(298deg, #3bdcb1 13.06%, #11a3b7 84.95%);
+$cyanReverseGradientColor: linear-gradient(115deg, #3bdcb1 13.06%, #11a3b7 84.95%);
+$redGradientColor: linear-gradient(110.05deg, $redColor 13.06%, rgba(253, 117, 117, 0.5) 84.95%);
+$bgPrimary: #181f35;
+$bgGray: #98a2ac;
+$bgCyan: #11a3b7;
+$bgNavbar: #242f4e;
+$bgModal: #1a2238;
+$bgSecondary: linear-gradient(180deg, #1a2238 0%, #070d1d 100%);
+$bgSPMenuGradientColor: linear-gradient(180deg, #1a2238f0 0%, #070d1df0 100%);
+$primaryFont: 'Source Sans Pro', sans-serif;
+
+@mixin transition() {
+    transition: all 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+@mixin breakpoint($point) {
+    @if $point == desktop {
+        @media (max-width: 1440px) {
+            @content;
+        }
+    } @else if $point == laptop {
+        @media (max-width: 1120px) {
+            @content;
+        }
+    } @else if $point == tablet {
+        @media (max-width: 900px) {
+            @content;
+        }
+    } @else if $point == phablet {
+        @media (max-width: 768px) {
+            @content;
+        }
+    } @else if $point == mobile {
+        @media (max-width: 500px) {
+            @content;
+        }
+    } @else {
+        @media ($point) {
+            @content;
+        }
+    }
+}
+
+@mixin flexWrapper {
+    display: flex;
+}
+
+@mixin flexColumn {
+    flex-direction: column;
+}
+
+@mixin flexRow {
+    flex-direction: row;
+}
+
+@mixin flexRowReverse {
+    flex-direction: row-reverse;
+}
+
+@mixin justifyContentSpaceEven {
+    justify-content: space-evenly;
+}
+
+@mixin justifyContentSpaceAround {
+    justify-content: space-around;
+}
+
+@mixin justifyContentSpaceBetween {
+    justify-content: space-between;
+}
+
+@mixin justifyContentCenter {
+    justify-content: center;
+}
+
+@mixin justifyContentStart {
+    justify-content: flex-start;
+}
+
+@mixin justifyContentEnd {
+    justify-content: flex-end;
+}
+
+@mixin alignItemsCenter {
+    align-items: center;
+}
+
+@mixin alignItemsStart {
+    align-items: flex-start;
+}
+
+@mixin alignItemsEnd {
+    align-items: flex-end;
+}
+
+@mixin textEllipsis {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: $primaryFont;
+    background: $bgSecondary;
+    color: $textColor;
+
+    &::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: $bgPrimary;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: $grayText;
+        border-radius: 3px;
+    }
+}
+
+a,
+button,
+input,
+textarea {
+    font-family: $primaryFont;
+}
+
+#root {
+    min-height: 100vh;
+    height: 100%;
+    display: grid;
+    grid-template-rows: max-content 1fr max-content;
+    align-items: flex-end;
+    overflow: hidden;
+    position: relative;
+
+    @include breakpoint(phablet) {
+        padding-left: 0;
+    }
+}
+
+main {
+    align-self: flex-start;
+    padding: 0 2.5rem;
+
+    @include breakpoint(phablet) {
+        padding: 0 1.5rem;
+    }
+}
+
+section {
+    max-width: 1220px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 5rem;
+    padding-bottom: 1rem;
+}
+
+.container {
+    max-width: 1220px;
+    width: 100%;
+    padding: 0 0;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+
+    @include breakpoint(phablet) {
+        // padding: 0 1.68rem;
+    }
+}
+
+p {
+    font-size: 18px;
+}
+
+a,
+button {
+    outline: none;
+}
+
+input[type='number'] {
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        -moz-appearance: textfield;
+    }
+    -moz-appearance: textfield;
+}
+
+input {
+    color: white !important;
+
+    &:disabled,
+    &:read-only {
+        color: $grayText !important;
+    }
+}
+
+.page-loading {
+    width: 100vw;
+    height: 100vh;
+    @include flexWrapper;
+    @include justifyContentCenter;
+    @include alignItemsCenter;
+}

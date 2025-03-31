@@ -1,0 +1,453 @@
+.pool-card {
+    max-width: 300px;
+    box-shadow: -10px -10px 15px rgba(50, 64, 102, 0.2), 10px 10px 15px rgba(1, 7, 19, 0.2);
+    border-radius: 20px;
+    font-family: 'Rubik', sans-serif;
+    height: fit-content;
+    position: relative;
+    overflow: hidden;
+
+    &:before {
+        position: absolute;
+        content: '';
+        background: linear-gradient(271.01deg, #616f94 -9.5%, rgba(36, 46, 71, 0) 37.88%);
+        opacity: 0.3;
+        width: 1000px;
+        height: 700px;
+        left: -644px;
+        top: -495px;
+        border-radius: 50%;
+        z-index: 0;
+    }
+
+    @include breakpoint(tablet) {
+        max-width: unset;
+    }
+
+    @include breakpoint(phablet) {
+        width: 70%;
+        margin: 0 auto;
+    }
+
+    @include breakpoint(mobile) {
+        margin: unset;
+        width: unset;
+    }
+
+    span.exchange {
+        font-size: 10px;
+        font-style: italic;
+        font-weight: 300;
+    }
+
+    span.balance {
+        font-weight: 400;
+        font-size: 14px;
+    }
+
+    .focus {
+        color: $primaryColor;
+    }
+
+    .pool-overview {
+        background: $bgNavbar;
+        display: grid;
+        min-height: 120px;
+        grid-template-columns: 7fr 6fr;
+        border-radius: 20px 20px 0 0;
+        padding: 1.5rem .75rem .25rem .75rem;
+
+        .token-info {
+            display: grid;
+            grid-template-columns: 3fr 4fr;
+            align-items: center;
+            justify-content: center;
+            column-gap: 1rem;
+            justify-items: center;
+            z-index: 1;
+
+            .token-image {
+                display: flex;
+                position: relative;
+                z-index: 3;
+                justify-content: center;
+                align-items: center;
+                width: 60px;
+                height: 60px;
+                border-radius: 50%;
+                background: $primaryColor;
+                box-shadow: 0px 0px 0px 2px #1a2238, -5px -5px 10px rgba(255, 255, 255, 0.1),
+                    5px 10px 10px rgba(1, 7, 19, 0.2);
+
+                &.bg-dark {
+                    background: linear-gradient(180deg, #434876 0%, #61678f 100%);
+                }
+
+                img {
+                    max-height: 70%;
+                    max-width: 70%;
+                }
+            }
+
+            .token-pair {
+                position: relative;
+                .token-image:last-of-type {
+                    position: absolute;
+                    top: -20px;
+                    right: -15px;
+                    width: 35px;
+                    height: 35px;
+                    z-index: 2;
+                    background: unset;
+                }
+            }
+
+            .token-symbol {
+                display: flex;
+                flex-direction: column;
+                row-gap: .5rem;
+                width: 100%;
+
+                > span {
+                    font-size: 20px;
+                    font-weight: 600;
+                    margin-right: 4px;
+                }
+
+                .description {
+                    font-size: 12px;
+                    display: block;
+
+                    b {
+                        font-weight: 500;
+                    }
+                }
+            }
+        }
+
+        .pool-info {
+            display: flex;
+            flex-direction: column;
+            padding-left: .4rem;
+            row-gap: .5rem;
+            border-left: 1px dashed #ffffff80;
+            z-index: 1;
+            justify-content: space-between;
+
+            .div-apy, .div-balance {
+                display: flex;
+                flex-direction: column;
+
+                span {
+                    font-weight: 400;
+
+                    &.label {
+                        font-size: 10px;
+                        font-weight: 700;
+                        font-family: $primaryFont;
+                    }
+
+                    
+
+                    &.apy {
+                        font-size: 20px;
+                    }
+                }
+            }
+
+            .div-indicator.expand {
+                height: calc(0.5rem + 15px);
+            }
+
+            @include breakpoint(phablet) {
+                padding-left: 1rem;
+            }
+        }
+    }
+
+    .rewards-table-header {
+        background: $bgNavbar;
+        width: 100%;
+        padding: 0.5rem 1rem 0;
+        display: grid;
+        grid-template-columns: 2fr 5fr 3fr;
+        align-items: center;
+        height: calc(0.5rem + 12px);
+
+        span {
+            color: $primaryColor;
+            font-family: $primaryFont;
+            font-weight: bold;
+            font-size: 10px;
+
+            &.right {
+                text-align: right;
+            }
+        }
+    }
+
+    .rewards-table, .reward-info {
+        background: $bgNavbar;
+        width: 100%;
+        padding: 0.4rem 1rem 0;
+        display: flex;
+    }
+
+    .rewards-table {
+        .rewards-table-body {
+            width: 100%;
+            border-top: 1px dashed #ffffff80;
+        }
+
+        .rewards-table-row {
+            display: grid;
+            grid-template-columns: 2fr 5fr 3fr;
+            align-items: center;
+            height: 50px;
+            padding: .3rem 0rem;
+
+            span.right {
+                text-align: right;
+            }
+
+            .reward-logo {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 35px;
+                height: 35px;
+                border-radius: 50%;
+                background: $primaryColor;
+                box-shadow: 0px 0px 0px 2px #1a2238, -5px -5px 10px rgba(255, 255, 255, 0.1),
+                    5px 10px 10px rgba(1, 7, 19, 0.2);
+
+                img {
+                    max-height: 70%;
+                    max-width: 70%;
+                }
+            }
+
+            .reward-claimable {
+                display: flex;
+                flex-direction: column;
+                row-gap: .25rem;
+            }
+        }
+    }
+
+    .reward-info {
+        .reward-contents {
+            width: 100%;
+            height: 100px;
+            display: grid;
+            grid-template-columns: 7fr 6fr;
+            align-items: center;
+            border-top: 1px dashed #ffffff80;
+        }
+
+        .reward-token-wrapper {
+            display: grid;
+            grid-template-columns: 3fr 4fr;
+            align-items: center;
+            justify-items: center;
+            column-gap: 1rem;
+        }
+
+        .reward-logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: $primaryColor;
+            box-shadow: 0px 0px 0px 2px #1a2238, -5px -5px 10px rgba(255, 255, 255, 0.1),
+                5px 10px 10px rgba(1, 7, 19, 0.2);
+
+            img {
+                max-height: 70%;
+                max-width: 70%;
+            }
+        }
+
+        .reward-ticker, .reward-claimable {
+            display: flex;
+            flex-direction: column;
+            row-gap: .3rem;
+
+            span:first-child {
+                font-weight: bold;
+                font-size: 10px;
+                color: $primaryColor;
+            }
+        }
+
+        .reward-ticker {
+            width: 100%;
+            row-gap: .5rem;
+            span {
+                font-weight: bold;
+            }
+
+            span:last-child {
+                font-size: 14px;
+            }
+        }
+    }
+    
+    .button-container {
+        display: grid;
+        background-color: $bgPrimary;
+        &.with-harvest {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        grid-template-columns: 1fr;    
+        padding: 1rem 1.5rem;
+        column-gap: 1rem;
+
+        button {
+            font-size: 14px;
+        }
+
+        .simple-btn-wrapper {
+            height: 36px;
+            background: $bgCyan;
+        }
+    }
+
+    .reward-details {
+        padding: 0 1rem;
+        overflow-y: clip;
+        border-radius: 0 0 20px 20px;
+        max-height: 20px;
+        pointer-events: none;
+        background: $bgNavbar;
+        transition: all 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+
+        .reward-details-wrapper {
+            transition: all 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+            opacity: 0;
+        }
+
+        &.open {
+            padding: .5rem 1rem;
+            pointer-events: all;
+            max-height: 600px;
+
+            .reward-details-wrapper {
+                opacity: 1;
+            }
+        }
+
+        .reward-potential-title {
+            font-weight: 700;
+            font-size: 12px;
+            text-align: center;
+            padding: .3rem 0;
+            border-bottom: 1px dashed #ffffff80;
+        }
+
+        .reward-potential-table {
+            padding: .5rem .75rem;
+        }
+
+        .reward-period, .reward-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            font-weight: 400;
+            font-size: 14px;
+            span {
+                width: 100%;
+                text-align: center;
+                padding: .3rem 0;
+            }
+        }
+
+        .reward-period {
+            font-family: $primaryFont;
+        }
+
+        .reward-row {
+            border-bottom: 1px solid #ffffff80;
+
+            span {
+                &:first-child {
+                    border-right: 1px solid #ffffff80;
+                }
+            }
+
+            &:last-child {
+                border-bottom: none;
+            }
+        }
+
+        .reward-potential-distributed {
+            .progress-bar-wrapper {
+                .rootDiv {
+                    height: 15px !important;
+                }
+
+                .title-bar {
+                    font-size: 10px !important;
+                    font-family: $primaryFont !important;
+                    font-weight: 400 !important;
+                    margin: .3rem 0;
+                }
+
+                .token-status-bar {
+                    font-size: 10px !important;
+                    font-family: $primaryFont !important;
+                    justify-content: flex-start !important;
+                    margin: .3rem 0;
+
+                    span:first-child {
+                        margin-right: .3rem;
+                        color: $primaryColor;
+                    }
+                }
+            }
+        }
+
+        .deposit-fee, .total-liquidity {
+            display: flex;
+            align-items: center;
+            span {
+                font-size: 10px;
+                font-weight: 400;
+            }
+        }
+    }
+
+    .footer {
+        border-radius: 0 0 20px 20px;
+        background: $bgNavbar;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0.5rem;
+
+        .details-open {
+            cursor: pointer;
+            opacity: .5;
+            @include transition;
+
+            svg {
+                @include transition;
+            }
+
+            &:hover {
+                opacity: 1;
+            }
+
+            &.open {
+                svg {
+                    transform: rotate(180deg);
+                }
+            }
+        }
+
+        span {
+            padding-right: .5rem;
+        }
+    }
+}

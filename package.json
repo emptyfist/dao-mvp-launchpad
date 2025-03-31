@@ -1,0 +1,67 @@
+{
+  "name": "otaris",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "abi-decoder": "^2.4.0",
+    "buffer": "^6.0.3",
+    "camelcase-keys": "8.0.2",
+    "clsx": "^1.1.1",
+    "dayjs": "^1.11.7",
+    "ethers": "^5.7.2",
+    "moment": "^2.29.1",
+    "process": "^0.11.10",
+    "react": "^18.2.0",
+    "react-app-rewired": "^2.2.1",
+    "react-dom": "^18.2.0",
+    "react-google-recaptcha": "^2.1.0",
+    "react-hot-toast": "^2.2.0",
+    "react-loading-skeleton": "^3.0.3",
+    "react-markdown": "^8.0.5",
+    "react-modal": "^3.14.3",
+    "react-range": "^1.8.14",
+    "react-router-dom": "^6.6.2",
+    "react-scripts": "5.0.1",
+    "react-select": "^5.7.0",
+    "react-tooltip": "4.2.21",
+    "rehype-autolink-headings": "^6.1.1",
+    "rehype-raw": "^6.1.1",
+    "rehype-slug": "^5.0.1",
+    "rehype-stringify": "^9.0.3",
+    "rehype-toc": "^3.0.2",
+    "remark-extended-table": "^1.0.1",
+    "remark-gfm": "^3.0.1",
+    "remark-github-beta-blockquote-admonitions": "^1.1.0",
+    "remark-rehype": "^10.1.0",
+    "sass": "^1.57.1",
+    "socket.io-client": "2.3.1",
+    "stream-browserify": "^3.0.0"
+  },
+  "scripts": {
+    "start": "set PORT=443&&set HTTPS=true&&set SSL_CRT_FILE=./reactcert/cert.pem&&set SSL_KEY_FILE=./reactcert/key.pem&&react-app-rewired start",
+    "build": "set GENERATE_SOURCEMAP=false&&react-app-rewired build",
+    "test": "react-app-rewired test",
+    "eject": "react-app-rewired eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "resolutions": {
+    "react-error-overlay": "6.0.9"
+  }
+}

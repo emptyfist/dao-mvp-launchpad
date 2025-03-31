@@ -1,0 +1,1105 @@
+.modal-overlay {
+    z-index: 1000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: $bgSPMenuGradientColor;
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: none;
+
+    .modal-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 90%;
+        background: transparent;
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+        border-radius: 20px;
+        outline: none;
+
+        &.verify-kyc-email {
+            max-width: 480px;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            background: $bgModal;
+            position: relative;
+            box-shadow: -10px -10px 15px rgba(50, 64, 102, 0.3), 10px 10px 15px rgba(1, 7, 19, 0.3);
+
+            .header {
+                height: 3em;
+                color: $textColor;
+                background: $cyanGradientColor;
+                font-size: 24px;
+                font-weight: 600;
+                @include flexWrapper;
+                @include justifyContentCenter;
+                @include alignItemsCenter;
+
+                &.failed {
+                    background: linear-gradient(136.3deg, #f0a871 0%, #cc5f3e 100%) !important;
+                }
+            }
+
+            .content {
+                padding: 35px 70px;
+                display: grid;
+                row-gap: 1.5rem;
+
+                span {
+                    text-align: center;
+                }
+
+                p {
+                    color: white;
+                    opacity: 0.5;
+                    cursor: pointer;
+                    text-decoration: underline;
+                    text-align: center;
+                }
+
+                .simple-btn-wrapper.failed {
+                    background: linear-gradient(136.3deg, #f0a871 0%, #cc5f3e 100%) !important;
+                }
+            }
+        }
+
+        &.connect-wallet {
+            max-width: 400px;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            background: $bgModal;
+            position: relative;
+            box-shadow: -10px -10px 15px rgba(50, 64, 102, 0.3), 10px 10px 15px rgba(1, 7, 19, 0.3);
+
+            .header {
+                height: 3em;
+                color: $textColor;
+                background: $cyanGradientColor;
+                font-size: 24px;
+                font-weight: 600;
+                @include flexWrapper;
+                @include justifyContentCenter;
+                @include alignItemsCenter;
+            }
+
+            .content {
+                padding: 2rem;
+                border-radius: 0.6rem;
+                display: grid;
+                flex-direction: column;
+                row-gap: 1rem;
+
+                button {
+                    background-color: rgba($primaryColor, 0.5);
+                    border: none;
+                    border-radius: 30px;
+                    padding: 0.3rem 1rem;
+                    height: 50px;
+                    font-size: 18px;
+                    font-weight: 700;
+                    color: $textColor;
+                    display: grid;
+                    grid-template-columns: 1fr 4fr;
+                    align-items: center;
+                    justify-items: center;
+                    @include transition;
+                    line-height: 1.5;
+
+                    &:hover:not(:disabled) {
+                        background-color: $primaryColor;
+                        cursor: pointer;
+                    }
+
+                    &:disabled{
+                        opacity: .5;
+                    }
+
+                    span {
+                        padding-right: 0.5rem;
+                    }
+
+                    &.disconnect {
+                        grid-template-columns: 1fr;
+                        background-color: #eee;
+                        color: $primaryColor;
+                        font-size: 22px;
+
+                        &:hover:enabled {
+                            background-color: $textColor;
+                        }
+
+                        &:hover:disabled {
+                            background-color: #eee;
+                        }
+                    }
+                }
+            }
+        }
+
+        &.contribute-modal {
+            max-width: 480px;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            background: $bgModal;
+            position: relative;
+            box-shadow: -10px -10px 15px rgba(50, 64, 102, 0.3), 10px 10px 15px rgba(1, 7, 19, 0.3);
+
+            .header {
+                height: 3em;
+                color: $textColor;
+                background: $cyanReverseGradientColor;
+                font-size: 24px;
+                font-family: 'Rubik';
+                font-weight: 600;
+                text-align: center;
+                @include flexWrapper;
+                @include flexColumn;
+                @include justifyContentCenter;
+                @include alignItemsCenter;
+
+                span {
+                    display: block;
+                    font-size: 14px;
+                    font-weight: normal;
+                }
+            }
+
+            .content {
+                padding: 2rem;
+                border-radius: 0.6rem;
+                display: grid;
+                flex-direction: column;
+                row-gap: 0rem;
+
+                .balance-container {
+                    @include flexWrapper;
+                    @include justifyContentSpaceBetween;
+                    padding-right: 0px;
+                }
+
+                > button {
+                    background-color: rgba($primaryColor, 0.5);
+                    border: none;
+                    border-radius: 30px;
+                    padding: 0.3rem 1rem;
+                    height: 40px;
+                    font-size: 18px;
+                    font-weight: 700;
+                    color: $textColor;
+                    cursor: pointer;
+                    display: grid;
+                    grid-template-columns: 1fr 4fr;
+                    align-items: center;
+                    justify-items: center;
+                    @include transition;
+                    line-height: 1.5;
+
+                    &:hover {
+                        background-color: $primaryColor;
+                    }
+
+                    span {
+                        padding-right: 0.5rem;
+                    }
+
+                    &.disconnect {
+                        grid-template-columns: 1fr;
+                        background-color: #eee;
+                        color: $primaryColor;
+                        font-size: 22px;
+
+                        &:hover:enabled {
+                            background-color: $textColor;
+                        }
+
+                        &:hover:disabled {
+                            background-color: #eee;
+                        }
+                    }
+                }
+
+                span {
+                    font-size: 14px;
+                    font-weight: normal;
+                    line-height: 18px;
+                }
+
+                .contribute {
+                    @include flexWrapper;
+                    background: $cyanReverseGradientColor;
+                    border-radius: 20px;
+                    font-size: 14px;
+                    font-weight: normal;
+                    line-height: 18px;
+                    margin-top: 1rem;
+                    position: relative;
+
+                    .step-wrapper {
+                        @include flexWrapper;
+                        @include justifyContentCenter;
+                        @include alignItemsCenter;
+                        position: absolute;
+                        right: 1rem;
+                        top: 0;
+                        height: 40px;
+
+                        span {
+                            font-size: 14px;
+                        }
+                    }
+                }
+
+                span.confirm-notify {
+                    text-align: center;
+                    padding-top: .5rem;
+                    color: $grayText;
+                }
+            }
+        }
+
+        &.transaction-confirm {
+            max-width: 420px;
+            height: 260px;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            background: linear-gradient(110.05deg, #3bdcb1 13.06%, #11a3b7 84.95%);
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+            border-radius: 20px;
+
+            &.fail {
+                background: linear-gradient(110.05deg, $redColor 13.06%, rgba(253, 117, 117, 0.5) 84.95%);
+            }
+
+            .header {
+                .transaction-close-button {
+                    @include flexWrapper;
+                    @include alignItemsCenter;
+                    @include justifyContentCenter;
+
+                    position: absolute !important;
+                    right: 12px !important;
+                    top: 20px !important;
+                    width: 30px !important;
+                    height: 30px !important;
+                    background-color: transparent !important;
+                    border-radius: 50%;
+                    border: none !important;
+                    cursor: pointer;
+                    @include transition;
+
+                    svg {
+                        width: 20px;
+                        height: 20px;
+                    }
+
+                    &:hover {
+                        background-color: #ffffff40 !important;
+                    }
+                }
+            }
+
+            .content {
+                height: 100%;
+
+                .content-wrapper {
+                    @include flexWrapper;
+                    @include flexColumn;
+                    @include alignItemsCenter;
+                    @include justifyContentSpaceAround;
+                    height: 100%;
+                    padding: 2rem;
+
+                    .status-icon {
+                        margin: 1rem 0;
+                    }
+
+                    .prompt {
+                        font-family: 'Rubik';
+                        @include flexWrapper;
+                        @include flexColumn;
+                        @include alignItemsCenter;
+
+                        span {
+                            font-size: 18px;
+                            margin-bottom: 0.3rem;
+                        }
+
+                        a {
+                            @include transition;
+                            background-color: transparent !important;
+                            font-size: 15px;
+                            cursor: pointer;
+
+                            &:hover {
+                                opacity: 0.7;
+                                text-decoration: underline;
+                            }
+                        }
+
+                        p {
+                            font-size: 15px;
+                            opacity: 0.7;
+                        }
+
+                        button {
+                            margin: 1rem 0 0;
+                            box-shadow: unset;
+
+                            span {
+                                margin: 0;
+                                font-size: 14px;
+                            }
+                        }
+                    }
+                }
+
+                .loading {
+                    @include flexWrapper;
+                    @include flexColumn;
+                    @include alignItemsCenter;
+                    @include justifyContentCenter;
+
+                    height: 250px;
+                }
+            }
+        }
+
+        &.wrong-network {
+            max-width: 370px;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            background: $bgModal;
+            box-shadow: -10px -10px 15px rgba(50, 64, 102, 0.3), 10px 10px 15px rgba(1, 7, 19, 0.3);
+
+            .header {
+                color: $textColor;
+                background: $cyanReverseGradientColor;
+                line-height: 60px;
+                font-size: 18px;
+                font-family: 'Rubik';
+                font-weight: 600;
+                text-align: center;
+            }
+
+            .content-wrapper {
+                display: grid;
+                grid-template-columns: minmax(0, 1fr);
+                grid-row-gap: 2rem;
+                padding: 2rem;
+                justify-items: center;
+
+                .switch-network {
+                    background: linear-gradient(110.05deg, #3bdcb1 13.06%, #11a3b7 84.95%);
+                    box-shadow: 0px 0px 0px 2px #29c1b1, -5px -5px 10px rgba(255, 255, 255, 0.1),
+                        5px 10px 10px rgba(1, 7, 19, 0.2);
+                    border-radius: 20px;
+                    width: 200px;
+                    padding: 1rem;
+                    @include transition;
+
+                    &:hover {
+                        opacity: 0.7;
+                    }
+
+                    span {
+                        padding: 0 0.5rem;
+                        color: white;
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
+
+        &.upgradeNFT-modal {
+            max-width: 380px;
+            border-radius: 20px;
+            overflow: visible !important;
+            background: $bgPrimary;
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.08);
+            position: relative;
+            // box-shadow: -10px -10px 15px rgba(50, 64, 102, 0.3), 10px 10px 15px rgba(1, 7, 19, 0.3);
+
+            .header {
+                @include flexWrapper;
+                @include flexColumn;
+                @include justifyContentCenter;
+                @include alignItemsCenter;
+
+                height: 3.5em;
+                color: $textColor;
+                background: $cyanGradientColor;
+                font-size: 24px;
+                font-weight: 600;
+                border-radius: 20px 20px 0 0;
+
+                p {
+                    font-weight: normal;
+                    font-size: 14px;
+                }
+            }
+
+            .content {
+                padding: 0 2rem;
+                border-radius: 0 0 20px 20px;
+                background: #242f4e;
+
+                .mint-close-button {
+                    @include flexWrapper;
+                    @include alignItemsCenter;
+                    @include justifyContentCenter;
+
+                    position: absolute !important;
+                    right: 12px !important;
+                    top: 95px !important;
+                    width: 30px !important;
+                    height: 30px !important;
+                    background-color: transparent !important;
+                    border-radius: 50%;
+                    border: none !important;
+                    cursor: pointer;
+                    @include transition;
+
+                    svg {
+                        width: 20px;
+                        height: 20px;
+                    }
+
+                    &:hover {
+                        background-color: #ffffff40 !important;
+                    }
+                }
+
+                .content-info {
+                    @include flexWrapper;
+                    @include flexColumn;
+                    @include alignItemsCenter;
+
+                    .title {
+                        font-size: 25px;
+                        font-weight: normal;
+                        color: #3bdcb1;
+                    }
+
+                    .price {
+                        font-size: 25px;
+                        font-weight: bold;
+                        color: #3bdcb1;
+
+                        span.slip {
+                            margin-left: .5rem;
+                            font-size: 14px;
+                            color: #c33131;
+                        }
+                    }
+
+                    .balance {
+                        font-size: 20px;
+                        font-weight: normal;
+                        color: white;
+                        padding: 1rem 0;
+                    }
+
+                    .slippage-container {
+                        width: 100%;
+                        padding: 1.5rem 0;
+                        border-top: 1px dashed #bac6d2;
+
+                        .slippage-slider {
+                            display: flex;
+                            align-items: center;
+                        }
+
+                        .slippage-title {
+                            display: flex;
+                            align-items: center;
+                            justify-content: space-between;
+
+                            .slippage-info-wrapper {
+                                display: flex;
+                                align-items: flex-start;
+
+                                button {
+                                    background: none;
+                                    border: none;
+                                    padding: 0 0 0 .5rem;
+                                }
+    
+                                .slip-tooltip {
+                                    width: 280px;
+                                    font-size: 16px !important;
+                                    padding: 1rem 1.5rem !important;
+                                    border-radius: 17px !important;
+                                    background: linear-gradient(180deg, #35405b 0%, #222c45 100%) !important;
+                                    text-align: justify;
+                                    border: 2px solid #10172a;
+                                    box-shadow: 0px 0px 0px #1a2238, -5px -5px 10px rgba(255, 255, 255, 0.1),
+                                        5px 10px 10px rgba(1, 7, 19, 0.2);
+    
+                                    &.place-right {
+                                        margin-left: 40px !important;
+    
+                                        &:after {
+                                            left: -27px !important;
+                                            top: calc(50% - 8px) !important;
+                                            border-right-color: #10172a !important;
+                                            border-right-width: 25px !important;
+                                            border-top-width: 15px !important;
+                                            border-bottom-width: 15px !important;
+                                        }
+                                    }
+                                }
+                            }
+
+                            &:not(.percentage) {
+                                span:nth-child(2) {
+                                    font-weight: 600;
+                                    font-size: 13px;
+                                    padding: 0 0.5rem;
+                                    border-radius: 20px;
+                                    border: 1px solid #f0a871;
+                                }
+                            }
+
+                            @keyframes priceUpdated {
+                                from {opacity: 1;}
+                                to {opacity: 0;}
+                            } 
+                            
+                            span.price-updated-alert {
+                                animation-name: priceUpdated;
+                                animation-duration: 1s;
+                                animation-iteration-count: infinite;  
+                            }
+                        }
+                    }
+                }
+            }
+            .content-footer {
+                padding: 1rem 0;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                border-radius: 0 0 20px 20px;
+
+                .get-token {
+                    background-color: transparent;
+                    border: none;
+                    cursor: pointer;
+                    font-size: 15px;
+                    font-weight: normal;
+                    color: #5fd2a2;
+                    @include transition;
+
+                    &:hover {
+                        opacity: 0.5;
+                    }
+                }
+
+                .mint-button {
+                    background: linear-gradient(110.05deg, #3bdcb1 13.06%, #11a3b7 84.95%);
+                    box-shadow: 0px 0px 0px 2px #29c1b1, -5px -5px 10px rgba(255, 255, 255, 0.1),
+                        5px 10px 10px rgba(1, 7, 19, 0.2);
+                    width: 250px;
+                    margin: 1rem 0;
+                    height: 45px;
+                    font-size: 18px;
+                    border-radius: 20px;
+                    cursor: pointer;
+                    @include transition;
+
+                    &:hover {
+                        background-color: $primaryColor;
+                    }
+
+                    span {
+                        padding-right: 0.5rem;
+                    }
+                }
+            }
+
+            
+        }
+
+        &.important-notice {
+            max-width: 400px;
+            border-radius: 20px;
+            overflow: hidden;
+            background: $bgModal;
+            position: relative;
+            box-shadow: -10px -10px 15px rgba(50, 64, 102, 0.3), 10px 10px 15px rgba(1, 7, 19, 0.3);
+
+            .header {
+                @include flexWrapper;
+                @include flexColumn;
+                @include justifyContentCenter;
+                @include alignItemsCenter;
+
+                height: 3.5em;
+                color: $textColor;
+                background: $cyanGradientColor;
+                font-size: 24px;
+                font-weight: 600;
+            }
+
+            .content {
+                @include flexWrapper;
+                @include flexColumn;
+                @include alignItemsCenter;
+
+                padding: 2rem;
+
+                .content-detail {
+                    @include flexWrapper;
+                    @include flexColumn;
+
+                    border-bottom: 1px dashed;
+
+                    span {
+                        font-weight: normal;
+                        line-height: 25px;
+
+                        &.consider {
+                            font-weight: bold;
+                        }
+                    }
+                }
+
+                .question {
+                    font-weight: bold;
+                    font-size: 20px;
+                    margin: 1rem 0;
+                }
+
+                .button-group {
+                    @include flexWrapper;
+
+                    button {
+                        margin: 0 0.5rem;
+                        width: 120px;
+                        height: 40px;
+                        border-radius: 20px;
+                        font-weight: normal;
+                        font-size: 15px;
+                        cursor: pointer;
+                        @include transition;
+
+                        &:hover {
+                            opacity: 0.7;
+                        }
+
+                        span {
+                            padding-right: 0.5rem;
+                        }
+                    }
+
+                    .mint-button {
+                        background: linear-gradient(110.05deg, #3bdcb1 13.06%, #11a3b7 84.95%);
+                        box-shadow: 0px 0px 0px 2px #29c1b1, -5px -5px 10px rgba(255, 255, 255, 0.1),
+                            5px 10px 10px rgba(1, 7, 19, 0.2);
+                    }
+
+                    .cancel-button {
+                        background: linear-gradient(110.05deg, $redColor 13.06%, rgba(253, 117, 117, 0.5) 84.95%);
+                        box-shadow: 0px 0px 0px 2px $redColor, -5px -5px 10px rgba(255, 255, 255, 0.1),
+                            5px 10px 10px rgba(1, 7, 19, 0.2);
+                    }
+                }
+            }
+        }
+
+        &.stake-modal {
+            max-width: 480px;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            background: $bgModal;
+            position: relative;
+            box-shadow: -10px -10px 15px rgba(50, 64, 102, 0.3), 10px 10px 15px rgba(1, 7, 19, 0.3);
+
+            .header {
+                height: 3em;
+                color: $textColor;
+                background: $cyanGradientColor;
+                font-size: 24px;
+                font-weight: 600;
+                @include flexWrapper;
+                @include justifyContentCenter;
+                @include alignItemsCenter;
+            }
+
+            .content {
+                padding: 2rem;
+                border-radius: 0.6rem;
+                display: grid;
+                flex-direction: column;
+                row-gap: 1rem;
+
+                button {
+                    background-color: rgba($primaryColor, 0.5);
+                    border: none;
+                    border-radius: 30px;
+                    padding: 0.3rem 1rem;
+                    height: 40px;
+                    font-size: 18px;
+                    font-weight: 700;
+                    color: $textColor;
+                    cursor: pointer;
+                    display: grid;
+                    grid-template-columns: 1fr 4fr;
+                    align-items: center;
+                    justify-items: center;
+                    @include transition;
+                    line-height: 1.5;
+
+                    &:hover {
+                        background-color: $primaryColor;
+                    }
+
+                    span {
+                        padding-right: 0.5rem;
+                    }
+
+                    &.disconnect {
+                        grid-template-columns: 1fr;
+                        background-color: #eee;
+                        color: $primaryColor;
+                        font-size: 22px;
+
+                        &:hover:enabled {
+                            background-color: $textColor;
+                        }
+
+                        &:hover:disabled {
+                            background-color: #eee;
+                        }
+                    }
+                }
+
+                .balance-container {
+                    @include flexWrapper;
+                    @include justifyContentSpaceBetween;
+                    @include alignItemsCenter;
+                    padding-right: 72px;
+
+                    span {
+                        font-size: 14px;
+                        font-weight: normal;
+                        line-height: 18px;
+                    }
+                }
+
+                .button-container {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    column-gap: 1rem;
+
+                    button {
+                        @include flexWrapper;
+                        background: #11a3b7;
+                        border-radius: 20px;
+                        font-size: 14px;
+                        font-weight: normal;
+                        line-height: 18px;
+                    }
+                }
+
+                .link-container {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+
+                    span {
+                        cursor: pointer;
+                        color: $primaryColor;
+                        font-weight: 500;
+                        text-decoration: none;
+                        font-size: 14px;
+                        @include transition;
+
+                        &:hover {
+                            opacity: 0.7;
+                        }
+                    }
+                }
+            }
+        }
+
+        &.proc-liquidity,
+        &.proc-swap {
+            max-width: 500px;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            background: $bgModal;
+            position: relative;
+            box-shadow: -10px -10px 15px rgba(50, 64, 102, 0.3), 10px 10px 15px rgba(1, 7, 19, 0.3);
+
+            .header {
+                padding: 0 1.5rem;
+                height: 3em;
+                color: $textColor;
+                background: $cyanGradientColor;
+                font-weight: 600;
+                @include flexWrapper;
+                @include justifyContentSpaceBetween;
+                @include alignItemsCenter;
+
+                .back-arrow {
+                    svg {
+                        width: 20px;
+                        height: 20px;
+                    }
+                }
+
+                span {
+                    font-size: 24px;
+                }
+
+                svg {
+                    cursor: pointer;
+                    line {
+                        stroke: white;
+                    }
+                }
+            }
+
+            .content {
+                padding: 2rem 1.5rem;
+                background-color: $bgPrimary;
+
+                @include flexWrapper;
+                @include flexColumn;
+                row-gap: 1rem;
+
+                .main-palette {
+                    background-color: $bgNavbar;
+                    border-radius: 0 0 20px 20px;
+                    margin: -2rem -1.5rem 1rem -1.5rem;
+                    padding: 1.5rem;
+
+                    @include flexWrapper;
+                    @include flexColumn;
+                    row-gap: 1rem;
+
+                    .add-balance-caption {
+                        @include flexWrapper;
+                        @include alignItemsCenter;
+                        @include justifyContentSpaceBetween;
+
+                        font-size: 14px;
+
+                        .usd-value {
+                            color: #3bdcb1;
+                        }
+                    }
+
+                    .add-diver {
+                        @include flexWrapper;
+                        @include alignItemsCenter;
+                        @include justifyContentSpaceBetween;
+                        column-gap: 1.5rem;
+                        .divider {
+                            flex: 1;
+                            height: 0;
+                            border-bottom: 1px solid $bgGray;
+                        }
+                    }
+
+                    .add-balance1-wrapper,
+                    .add-balance2-wrapper {
+                        @include flexWrapper;
+                        @include alignItemsCenter;
+                        @include justifyContentSpaceBetween;
+                        column-gap: 0.5rem;
+                        margin-top: 1rem;
+
+                        .max {
+                            font-size: 14px;
+                            padding: 0.7rem 1rem;
+                            height: 42px;
+                            border-radius: 30px;
+                            border: 2px solid #11a3b7;
+                            color: #11a3b7;
+                            cursor: pointer;
+                        }
+
+                        .simple-input-container {
+                            width: unset;
+                            flex: 1;
+                            height: fit-content;
+                            margin: 0;
+
+                            input {
+                                border-radius: 30px;
+                                height: 46px;
+                            }
+                        }
+                    }
+
+                    .add-lp-wrapper {
+                        @include flexWrapper;
+                        @include flexColumn;
+                        row-gap: 1rem;
+                        > span {
+                            text-align: center;
+                            font-size: 14px;
+                        }
+
+                        .lp-wrapper {
+                            @include flexWrapper;
+                            @include alignItemsCenter;
+                            @include justifyContentCenter;
+                            column-gap: 1rem;
+                        }
+                    }
+
+                    .token-wrapper {
+                        @include flexWrapper;
+                        @include alignItemsCenter;
+                        @include justifyContentSpaceBetween;
+                        column-gap: 0.5rem;
+                        background: $bgPrimary;
+                        border-radius: 30px;
+                        border: 5px solid $bgPrimary;
+                        width: 150px;
+                        cursor: pointer;
+
+                        > span {
+                            color: #3bdcb1;
+                            font-size: 18px;
+                            font-weight: 500;
+                        }
+
+                        .token-balance {
+                            @include flexWrapper;
+                            @include flexColumn;
+                            font-size: 12px;
+                            margin-right: 1rem;
+
+                            span:last-child {
+                                color: #3bdcb1;
+                            }
+                        }
+
+                        img:last-child {
+                            margin-right: 1rem;
+                        }
+
+                        &.remove {
+                            width: fit-content !important;
+                        }
+                    }
+
+                    .exchange-rate {
+                        color: #3bdcb1;
+                        text-align: center;
+                        font-size: 12px;
+                        @include flexWrapper;
+                        @include alignItemsCenter;
+                        @include justifyContentCenter;
+
+                        svg {
+                            margin-left: 0.5rem;
+                            width: 14px;
+                            height: 14px;
+                        }
+                    }
+                }
+
+                > span {
+                    font-size: 18px;
+                }
+
+                .setting-wrapper {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    column-gap: 1rem;
+
+                    .caption-with-info {
+                        @include flexWrapper;
+                        @include alignItemsCenter;
+                        column-gap: 0.5rem;
+                        font-size: 12px;
+                        color: #5fd2a2;
+
+                        svg {
+                            margin-left: 0.2rem;
+                            width: 16px;
+                            height: 16px;
+                            cursor: pointer;
+
+                            path {
+                                fill: #5fd2a2;
+                            }
+                        }
+                    }
+
+                    .input-wrapper {
+                        @include flexWrapper;
+                        @include alignItemsCenter;
+
+                        input {
+                            background: $bgNavbar !important;
+                            border-radius: 30px;
+                        }
+
+                        span {
+                            margin-left: 0.5rem;
+                        }
+
+                        .auto,
+                        .normal {
+                            font-size: 14px;
+                        }
+
+                        .auto {
+                            font-size: 14px;
+                            border-radius: 30px;
+                            padding: 0.3rem 0.7rem;
+                            border: 1px solid #33abe6;
+                            color: #33abe6;
+                        }
+                    }
+                }
+
+                .simple-btn-wrapper {
+                    span {
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.close-button {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    position: absolute !important;
+    right: 12px !important;
+    top: 20px !important;
+    width: 30px !important;
+    height: 30px !important;
+    background-color: transparent !important;
+    border-radius: 50%;
+    border: none !important;
+    cursor: pointer;
+    position: absolute;
+    @include transition();
+
+    svg {
+        width: 24x;
+        height: 24px;
+    }
+
+    &:hover {
+        background-color: #ffffff40 !important;
+    }
+}

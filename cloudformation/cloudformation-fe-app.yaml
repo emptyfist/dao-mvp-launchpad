@@ -1,0 +1,226 @@
+AWSTemplateFormatVersion: '2010-09-09'
+
+##
+# This AWS CLoudformation templates configures the frontend and a distribution via Cloudfront,
+# including HTTPS and DNS creation.
+# 
+# Cloud formation stack names:
+# - Launchpad-fe-app-dev (arn:aws:cloudformation:us-east-2:946497301585:stack/Launchpad-fe-app-dev/156a1490-ed46-11ec-a89c-0a27eef80a54)
+# - Launchpad-fe-app-uat (arn:aws:cloudformation:us-east-2:946497301585:stack/Launchpad-fe-app-uat/46cf9630-f067-11ec-8345-02b793202106)
+# - Launchpad-fe-app-prod (arn:aws:cloudformation:us-east-2:946497301585:stack/Launchpad-fe-app-prod/02832580-f136-11ec-8757-026b2fe2c25e)
+#
+# NOTES: Buckets are intended to be created manually and populated with a react build before the deploy of this template.
+##
+
+Parameters:
+  # dev
+  # uat
+  # prod
+  DomainName:
+    Type: String 
+    # otaris-dev-app.faculty.tools
+    # otaris-uat-app.faculty.tools
+    # app.otaris.io
+  HostedZoneId:
+    Type: String 
+    # Z0931343IBWWN588X6XF (faculty.tools)
+    # Z0931343IBWWN588X6XF (faculty.tools)
+    # Z09207378V1CO1EXQ1U3 (otaris.io)
+  S3Bucket:
+    Type: String 
+    # launchpad-frontend-app-dev
+    # launchpad-frontend-app-uat
+    # launchpad-frontend-app-prod
+  CertificateArn: # Certificates for cloudfront must always be in eu-east-1 so we shouldnt create it via cloudformation
+    Type: String 
+    # arn:aws:acm:us-east-1:946497301585:certificate/0cbba268-b6b3-47a6-979c-6e17b9f37531 (otaris-dev-app.faculty.tools)
+    # arn:aws:acm:us-east-1:946497301585:certificate/d80958b8-82af-4cf6-9446-278083527cf4 (otaris-uat-app.faculty.tools)
+    # arn:aws:acm:us-east-1:946497301585:certificate/f1d423fd-41be-4cf2-bcba-3be73eea8fbc (app.otaris.io)
+  ELBOrigin:
+    Type: String
+    # awseb-AWSEB-ZYMGF3KCE2KO-852204851.us-east-2.elb.amazonaws.com
+    # awseb-awseb-1gpm6bbq3zo68-622041946.us-east-2.elb.amazonaws.com
+    # awseb-AWSEB-1IRCZS0OTYFFB-1972575976.us-east-2.elb.amazonaws.com
+    
+Resources:
+  # Identity config required by Cloudformation
+  OriginAccessIdentity:
+    Type: AWS::CloudFront::CloudFrontOriginAccessIdentity
+    Properties:
+      CloudFrontOriginAccessIdentityConfig:
+        Comment: !Sub ${AWS::StackName}-s3-origin-oai
+
+  # S3 Repo for static files
+  S3FileRepo:
+    Type: AWS::S3::Bucket
+    DeletionPolicy: Retain
+    Properties:
+      BucketName: !Sub ${S3Bucket}-files
+      AccessControl: Private
+  
+  # Allows cloudformation to read from the static files bucket
+  StaticFilesBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref S3FileRepo
+      PolicyDocument:
+        Statement:
+          - Sid: PublicReadForStaticFilesBucket
+            Effect: Allow
+            Principal: 
+              AWS: !Sub arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity ${OriginAccessIdentity}
+            Action: 's3:GetObject'
+            Resource: !Sub arn:aws:s3:::${S3FileRepo}/*
+
+  # Allows cloudformation to read from the frontend bucket
+  BucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref S3Bucket
+      PolicyDocument:
+        Statement:
+          - Sid: PublicReadForGetBucketObjects
+            Effect: Allow
+            Principal: 
+              AWS: !Sub arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity ${OriginAccessIdentity}
+            Action: 's3:GetObject'
+            Resource: !Sub arn:aws:s3:::${S3Bucket}/*
+          - Sid: AllowsPushesFromBitbucket
+            Effect: Allow
+            Principal: 
+              AWS: arn:aws:iam::946497301585:user/AWSECRDeploymentUser
+            Action: 
+              - 's3:GetObject'
+              - 's3:ListBucket'
+              - 's3:PutObject'
+              - 's3:PutObjectAcl'
+              - 's3:DeleteObject'
+            Resource: 
+              - !Sub arn:aws:s3:::${S3Bucket}
+              - !Sub arn:aws:s3:::${S3Bucket}/*
+
+  # Cloudfront distributions
+  Distribution: 
+    Type: AWS::CloudFront::Distribution
+    Properties:
+      DistributionConfig:
+        Aliases:
+          - !Ref DomainName
+        Origins:
+          - DomainName: !Sub ${S3Bucket}.s3.${AWS::Region}.amazonaws.com
+            Id: S3Origin
+            S3OriginConfig:
+              OriginAccessIdentity: !Sub origin-access-identity/cloudfront/${OriginAccessIdentity}
+          - DomainName: !Sub ${S3Bucket}-files.s3.${AWS::Region}.amazonaws.com
+            Id: S3OriginStaticFiles
+            S3OriginConfig:
+              OriginAccessIdentity: !Sub origin-access-identity/cloudfront/${OriginAccessIdentity}
+          - DomainName: !Ref ELBOrigin
+            Id: ELBOrigin
+            CustomOriginConfig:
+              HTTPPort: 80
+              OriginProtocolPolicy: http-only
+            # OriginShield:
+            #   Enabled: True
+        Enabled: true
+        DefaultRootObject: index.html
+        HttpVersion: http2
+        CustomErrorResponses:
+          - ErrorCode: 403
+            ResponseCode: 200
+            ResponsePagePath: /index.html
+          - ErrorCode: 404
+            ResponseCode: 200
+            ResponsePagePath: /index.html
+        CacheBehaviors:
+        - PathPattern: api/*
+          AllowedMethods:
+            - DELETE
+            - GET
+            - HEAD
+            - OPTIONS
+            - PATCH
+            - POST
+            - PUT
+          TargetOriginId: ELBOrigin
+          ViewerProtocolPolicy: redirect-to-https
+          Compress: false
+          ResponseHeadersPolicyId: 60669652-455b-4ae9-85a4-c4c02393f86c # Managed-SimpleCORS
+          OriginRequestPolicyId: 216adef6-5c7f-47e4-b989-5492eafa07d3 # Managed-AllViewer
+          CachePolicyId: 4135ea2d-6df8-44a3-9df3-4b5a84be39ad # Managed-CachingDisabled
+        - PathPattern: files/*
+          AllowedMethods:
+            - GET
+            - HEAD
+            - OPTIONS
+          CachedMethods:
+            - GET
+            - HEAD
+            - OPTIONS
+          TargetOriginId: S3OriginStaticFiles
+          ViewerProtocolPolicy: redirect-to-https
+          Compress: true
+          ResponseHeadersPolicyId: 60669652-455b-4ae9-85a4-c4c02393f86c # Managed-SimpleCORS
+          OriginRequestPolicyId: 88a5eaf4-2fd4-4709-b370-b4c650ea3fcf # Managed-CORS-S3Origin
+          CachePolicyId: 658327ea-f89d-4fab-a63d-7e88639e58f6 # Managed-CachingOptimized
+        - PathPattern: swagger/*
+          AllowedMethods:
+            - DELETE
+            - GET
+            - HEAD
+            - OPTIONS
+            - PATCH
+            - POST
+            - PUT
+          TargetOriginId: ELBOrigin
+          ViewerProtocolPolicy: redirect-to-https
+          Compress: false
+          ResponseHeadersPolicyId: 60669652-455b-4ae9-85a4-c4c02393f86c # Managed-SimpleCORS
+          OriginRequestPolicyId: 216adef6-5c7f-47e4-b989-5492eafa07d3 # Managed-AllViewer
+          CachePolicyId: 4135ea2d-6df8-44a3-9df3-4b5a84be39ad # Managed-CachingDisabled
+        DefaultCacheBehavior:
+          AllowedMethods:
+            - DELETE
+            - GET
+            - HEAD
+            - OPTIONS
+            - PATCH
+            - POST
+            - PUT
+          CachedMethods:
+            - GET
+            - HEAD
+            - OPTIONS
+          TargetOriginId: S3Origin
+          ViewerProtocolPolicy: redirect-to-https
+          CachePolicyId: 658327ea-f89d-4fab-a63d-7e88639e58f6
+          Compress: true
+        PriceClass: PriceClass_100 # TODO Change this when going live to PriceClass_All
+        ViewerCertificate:
+          AcmCertificateArn: !Ref CertificateArn
+          SslSupportMethod: sni-only
+          MinimumProtocolVersion: TLSv1.2_2021
+
+  # Configure the DNS to the EBS created above
+  HostedZoneRecordSetGroup:
+    Type: AWS::Route53::RecordSetGroup
+    Properties:
+      HostedZoneId: !Ref HostedZoneId
+      RecordSets:
+        - Name: !Ref DomainName
+          Type: A
+          AliasTarget:
+            HostedZoneId: Z2FDTNDATAQYW2 # Cloudfront Service Endpoint (https://docs.aws.amazon.com/general/latest/gr/cf_region.html)
+            DNSName: !GetAtt Distribution.DomainName
+
+Outputs:
+  DistributionId:
+    Description: CloudFront Distribution Id
+    Value: !Ref Distribution
+    Export:
+      Name: !Sub ${AWS::StackName}-DistributionId
+  DistributionDomainName:
+    Description: CloudFront Distribution Domain Name
+    Value: !GetAtt Distribution.DomainName
+    Export:
+      Name: !Sub ${AWS::StackName}-DistributionDomainName

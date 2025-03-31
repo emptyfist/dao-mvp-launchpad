@@ -1,0 +1,215 @@
+#sales.page {
+    .filter-wrapper {
+        grid-template-columns: repeat(2, 1fr);
+
+        @include breakpoint(phablet) {
+            grid-template-columns: 1fr;
+        }
+
+        @include breakpoint(mobile) {
+            width: calc(100vw - 2rem);
+        }
+
+        .second-wrapper {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            @include alignItemsCenter;
+        }
+    }
+
+    .page-content {
+        .content-header-wrapper {
+            position: relative;
+        }
+
+        .content-body {
+            padding: 1rem 0 2rem;
+            display: grid;
+            grid-gap: 1.5rem;
+
+            &.with-children {
+                grid-template-columns: repeat(3, 1fr);
+                justify-items: center;
+
+                @include breakpoint(tablet) {
+                    grid-template-columns: repeat(2, 1fr);
+                }
+
+                @include breakpoint(mobile) {
+                    grid-template-columns: 1fr;
+                }
+            }
+
+            .live-card {
+                display: grid;
+                grid-row-gap: 1rem;
+                width: 100%;
+                max-width: 370px;
+                background: rgba(26, 34, 56, 0.8);
+                box-shadow: -10px -10px 15px rgba(50, 64, 102, 0.3), 10px 10px 15px rgba(1, 7, 19, 0.3);
+                border-radius: 20px;
+                font-family: 'Rubik', sans-serif;
+
+                .project-view {
+                    display: flex;
+                    justify-content: space-evenly;
+                    align-items: center;
+                    border-radius: 20px;
+                    background: $bgNavbar;
+                    padding: 30px;
+                    position: relative;
+                    overflow: hidden;
+
+                    @include breakpoint(phablet) {
+                        padding: 1.5rem 1rem;
+                    }
+
+                    .collapse-wrapper {
+                        cursor: pointer;
+                        display: none;
+                    }
+
+                    &:before {
+                        position: absolute;
+                        content: '';
+                        background: linear-gradient(271.01deg, #616f94 -9.5%, rgba(36, 46, 71, 0) 37.88%);
+                        opacity: 0.3;
+                        width: 1000px;
+                        height: 700px;
+                        left: -690px;
+                        top: -565px;
+                        border-radius: 50%;
+                        z-index: 0;
+                    }
+
+                    .project-logo {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        border-radius: 50%;
+                        z-index: 1;
+
+                        img {
+                            width: 50px;
+                            height: 50px;
+                        }
+                    }
+
+                    .project-info {
+                        margin-left: 0.5rem;
+
+                        .project-title {
+                            word-break: break-word;
+                            white-space: break-spaces;
+                            font-size: 18px;
+                        }
+                    }
+
+                    .info-toggle {
+                        background: linear-gradient(118.15deg, #25beb4 -236.43%, rgba(37, 190, 180, 0) 117.03%);
+                        border-radius: 0px 20px;
+                        position: absolute;
+                        right: 0;
+                        top: 0;
+                        display: flex;
+                        padding: 0.5rem;
+                        z-index: 3;
+                        color: #ffffff99;
+                        font-size: 12px;
+                        cursor: pointer;
+                    }
+
+                    .social-wrapper {
+                        position: absolute;
+                        right: 0;
+                        top: 0;
+                        border-radius: 0 20px 0 20px;
+                        background: linear-gradient(118.15deg, #25BEB4 -236.43%, rgba(37, 190, 180, 0) 117.03%);
+                        opacity: .7;
+                        display: flex;
+                        align-items: center;
+                        padding: 8px 10px;
+                        z-index: 3;
+
+                        svg {
+                            width: 14px;
+                            height: 14px;
+                        }
+
+                        a:last-child {
+                            margin-right: 0;
+                        }
+
+                        a {
+                            @include transition;
+                            opacity: 0.6;
+                            margin-right: 0.4rem;
+                            @include flexWrapper;
+                            @include alignItemsCenter;
+                            @include justifyContentCenter;
+
+                            &:hover {
+                                opacity: 0.9;
+                            }
+                        }
+                    }
+                }
+
+                .project-content {
+                    padding: 1rem 2rem;
+                    display: grid;
+                    flex-direction: column;
+                    grid-row-gap: 1rem;
+
+                    @include transition;
+
+                    @include breakpoint(phablet) {
+                        padding: 1rem;
+                    }
+
+                    &.can-collapse {
+                        &.collapsed {
+                            max-height: 0;
+                            height: 0;
+                            opacity: 0;
+                            padding: 0;
+                        }
+                    }
+
+                    .price-wrapper {
+                        .price-info {
+                            display: grid;
+                            grid-template-columns: 3fr 7fr;
+                            align-items: end;
+
+                            >span:first-child {
+                                color: #5e6986;
+                                text-align: right;
+                                font-size: 12px;
+                            }
+
+                            >span:last-child {
+                                font-size: 14px;
+                                margin-left: 0.5rem;
+                                @include textEllipsis;
+                            }
+
+                            &:last-child {
+                                margin-top: 0.5rem;
+                            }
+                        }
+                    }
+
+                    .footer-container {
+                        display: flex;
+                        justify-content: center;
+
+                        .btn-wrapper {
+                            margin: 0 .5rem;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
